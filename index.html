@@ -14,12 +14,37 @@
   <meta property="og:description" content="Simple client for sending SMS" />
 </head>
 <body>
+
   <div id="app">
     <h1 class="text-center"><samp>SMS Client</samp><br /><small>Sending SMS in a snap</small></h1>
     <div class="container">
-        <p>Hello, world</p>
+      <br /><br /><br /><br /><br />
+      <home></home>
     </div>
   </div>
+
+ <template id="home">
+   <form class="form-horizontal">
+    <div class="form-group">
+      <label for="number" class="col-sm-2 control-label">Number</label>
+      <div class="col-sm-10">
+        <input type="tel" class="form-control" name="number" id="number" value="+336000000">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="message" class="col-sm-2 control-label">Message</label>
+      <div class="col-sm-10">
+        <textarea class="form-control" rows="5"></textarea>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-default">Envoyer</button>
+      </div>
+    </div>
+  </form>
+ </template>
+
   <script src="js/vue.js"></script>
   <script src="js/vue-strap.min.js"></script>
   <script src="js/vue-resource.min.js"></script>
