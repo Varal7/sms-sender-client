@@ -2,8 +2,9 @@ var home = Vue.component('home', {
   template: '#home',
   data: function() {
     return {
-      number: "+33600000000",
+      number: "+33000000000",
       message: "Hello world",
+      token: "db6e2fd80cc11b01a6689a04e13cc468",
       sendingButton: "Send",
       submitDisabled: false,
       messageSent: false,
@@ -14,12 +15,11 @@ var home = Vue.component('home', {
     onSubmit: function() {
       this.submitDisabled = true;
       this.sendingButton = "Sending…";
-      var message = this.message;
-      var number = this.number;
       var formData = new FormData();
-      formData.append('number', number);
-      formData.append('message', message);
-      this.$http.post("http://10.8.0.8/sms.php", formData)
+      formData.append('number', this.number);
+      formData.append('message', this.message);
+      formData.append('token', this.token);
+      this.$http.post("api.php", formData)
       .then(response => {
         if (response.body[0].result == "success") {
           this.messageSent = true;
@@ -28,7 +28,7 @@ var home = Vue.component('home', {
         }
         this.submitDisabled = false;
         this.sendingButton = "Send";
-      }, respone => {
+      }, response => {
         console.log(response)
         this.messageNotSent = true;
         this.submitDisabled = false;
