@@ -8,6 +8,7 @@
   <title>SMS Client</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/app.css">
   <meta property="og:type" content="website" />
   <meta property="og:title" content="SMS Client" />
@@ -24,30 +25,42 @@
   </div>
 
  <template id="home">
-   <div class="panel panel-default">
-     <div class="panel-heading">
-       <h3>Send new message</h3>
-     </div>
-     <div class="panel-body">
-       <form v-on:submit.prevent="onSubmit" class="form-horizontal">
-        <div class="form-group">
-          <label for="number" class="col-sm-2 control-label">Number</label>
-          <div class="col-sm-10">
-            <input v-model="number" type="tel" class="form-control" name="number" id="number">
+   <div>
+     <alert v-model="messageSent" placement="top-right" duration="5000" type="success" width="400px" dismissable>
+       <span class="icon-ok-circled alert-icon-float-left"></span>
+       <strong>Message Sent!</strong>
+       <p>Message successfully sent.</p>
+     </alert>
+     <alert v-model="messageNotSent" placement="top-right" duration="5000" type="danger" width="400px" dismissable>
+       <span class="icon-info-circled alert-icon-float-left"></span>
+       <strong>Oh no!</strong>
+       <p>Message not sent.</p>
+     </alert>
+     <div class="panel panel-default">
+       <div class="panel-heading">
+         <h3>Send new message</h3>
+       </div>
+       <div class="panel-body">
+         <form v-on:submit.prevent="onSubmit" class="form-horizontal">
+          <div class="form-group">
+            <label for="number" class="col-sm-2 control-label">Number</label>
+            <div class="col-sm-10">
+              <input v-model="number" type="tel" class="form-control" name="number" id="number">
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="message" class="col-sm-2 control-label">Message</label>
-          <div class="col-sm-10">
-            <textarea v-model="message" class="form-control" rows="5"></textarea>
+          <div class="form-group">
+            <label for="message" class="col-sm-2 control-label">Message</label>
+            <div class="col-sm-10">
+              <textarea v-model="message" class="form-control" rows="5"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default" :disabled="submitDisabled">Send</button>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default" :disabled="submitDisabled">Send</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
  </template>

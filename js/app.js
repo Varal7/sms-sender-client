@@ -5,7 +5,9 @@ var home = Vue.component('home', {
       number: "+33600000000",
       message: "Hello world",
       sendingButton: "Send",
-      submitDisabled: false
+      submitDisabled: false,
+      messageSent: false,
+      messageNotSent: false,
     }
   },
   methods: {
@@ -19,20 +21,29 @@ var home = Vue.component('home', {
       formData.append('message', message);
       this.$http.post("http://10.8.0.8/sms.php", formData)
       .then(response => {
-        console.log(response.body[0].result)
+        if (response.body[0].result == "success") {
+          this.messageSent = true;
+        } else {
+          this.messageNotSent = true;
+        }
         this.submitDisabled = false;
         this.sendingButton = "Send";
       }, respone => {
         console.log(response)
+        this.messageNotSent = true;
         this.submitDisabled = false;
         this.sendingButton = "Send";
       });
     }
+  },
+  components: {
+    alert: VueStrap.alert
   }
 })
 
 new Vue({
   el: '#app',
+
 
   http: {
     emulateJSON: true,
