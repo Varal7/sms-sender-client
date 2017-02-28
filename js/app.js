@@ -13,15 +13,15 @@ var home = Vue.component('home', {
   },
   methods: {
     onSubmit: function() {
-      this.submitDisabled = true;
       this.sendingButton = "Sending…";
+      this.submitDisabled = true;
       var formData = new FormData();
       formData.append('number', this.number);
       formData.append('message', this.message);
       formData.append('token', this.token);
       this.$http.post("api.php", formData)
       .then(response => {
-        if (response.body[0].result == "success") {
+        if (response && response.body && response.body[0] && response.body[0].result == "success") {
           this.messageSent = true;
         } else {
           this.messageNotSent = true;
